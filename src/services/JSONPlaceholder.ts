@@ -1,11 +1,6 @@
-import type { Comment } from "../types/Comment";
-import type { Post } from "../types/Post";
-import type { User } from "../types/User";
+import type { Post, Comment, User } from "../types";
 
-export const traerDatos = async (
-  setPublicaciones: (posts: Post[]) => void,
-  setCargando: (cargando: boolean) => void
-) => {
+export const traerDatos: () => Promise<Post[]> = async () => {
   const publicaciones = await fetch(
     "https://jsonplaceholder.typicode.com/posts"
   );
@@ -33,6 +28,5 @@ export const traerDatos = async (
     return { ...publicacion, usuario, comentarios: comentariosPublicacion };
   });
 
-  setPublicaciones(posts);
-  setCargando(false);
+  return posts;
 };

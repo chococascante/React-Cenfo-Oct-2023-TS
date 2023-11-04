@@ -1,4 +1,5 @@
 import React from "react";
+import { Publicacion } from "../molecules/Publicacion";
 import type { Post } from "../../types/Post";
 
 interface ListaPublicacionesProps {
@@ -10,23 +11,9 @@ export const ListaPublicaciones: React.FC<ListaPublicacionesProps> = ({
 }) => {
   return (
     <ul>
-      {publicaciones.map((publicacion) => {
-        return (
-          <li key={publicacion.id}>
-            <p>{publicacion.usuario?.name}</p>
-            <p>{publicacion.body}</p>
-
-            <ul>
-              {publicacion.comentarios?.map((comentario) => (
-                <li key={comentario.id}>
-                  <p>{comentario.name}</p>
-                  <p>{comentario.body}</p>
-                </li>
-              ))}
-            </ul>
-          </li>
-        );
-      })}
+      {publicaciones.map((publicacion) => (
+        <Publicacion key={publicacion.id} publicacion={publicacion} />
+      ))}
     </ul>
   );
 };
