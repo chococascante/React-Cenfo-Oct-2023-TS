@@ -1,27 +1,25 @@
+import axios from "axios";
 import type { Post, Comment, User } from "../types";
 
 export async function traerDatos(): Promise<Post[]> {
-  const publicaciones = await fetch(
+  const publicaciones = await axios.get<Post[]>(
     "https://jsonplaceholder.typicode.com/posts"
   );
-  const publicacionesJSON = await publicaciones.json();
 
-  const comentarios = await fetch(
+  const comentarios = await axios.get<Comment[]>(
     "https://jsonplaceholder.typicode.com/comments"
   );
-  const comentariosJSON = await comentarios.json();
 
-  const usuarios = await fetch("https://jsonplaceholder.typicode.com/users");
-  const usuariosJSON = (await usuarios.json()) as User[];
+  const usuarios = await axios.get<User[]>(
+    "https://jsonplaceholder.typicode.com/users"
+  );
 
-  const posts = publicacionesJSON.map((publicacion: Post) => {
-    const comentariosPublicacion = comentariosJSON.filter(
-      (comentario: Comment) => {
-        return comentario.postId === publicacion.id;
-      }
-    );
+  const posts = publicaciones.data.map((publicacion) => {
+    const comentariosPublicacion = comentarios.data.filter((comentario) => {
+      return comentario.postId === publicacion.id;
+    });
 
-    const usuario = usuariosJSON.find((usuario) => {
+    const usuario = usuarios.data.find((usuario) => {
       return usuario.id === publicacion.userId;
     });
 

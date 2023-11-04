@@ -8,24 +8,36 @@ export const HomePage = () => {
   const [error, setError] = React.useState(false);
   const [publicaciones, setPublicaciones] = React.useState<Post[]>([]);
 
-  const fetchDatos = async () => {
+  const fetchDatos = React.useCallback(async () => {
     try {
       const datos = await traerDatos();
+
       setPublicaciones(datos);
       setCargando(false);
+
+      console.log("Terminé");
     } catch (error) {
       console.error(error);
       setError(true);
     }
-  };
+  }, []);
+
+  const cantidadPublicaciones = React.useMemo(() => {
+    return publicaciones.length;
+  }, [publicaciones.length]);
 
   React.useEffect(() => {
     fetchDatos();
-  }, []);
+  }, [fetchDatos]);
 
   if (error) return <p>Hubo un error al cargar los datos</p>;
 
   if (cargando) return <p>Cargando...</p>;
 
-  return <ListaPublicaciones publicaciones={publicaciones} />;
+  return (
+    <>
+      <p>Existen {cantidadPublicaciones} publicaciones:</p>
+      <ListaPublicaciones publicaciones={publicaciones} />
+    </>
+  );
 };

@@ -1,5 +1,6 @@
 import React from "react";
 import { ListaComentarios } from "../organisms/ListaComentarios";
+import { ListItem, Card, CardContent, Typography } from "@mui/material";
 import type { Post } from "../../types/Post";
 
 interface PublicacionProps {
@@ -8,13 +9,17 @@ interface PublicacionProps {
 
 export const Publicacion: React.FC<PublicacionProps> = ({ publicacion }) => {
   return (
-    <li>
-      <p>{publicacion.usuario?.name}</p>
-      <p>{publicacion.body}</p>
+    <ListItem>
+      <Card variant="outlined">
+        <CardContent>
+          <Typography variant="h5">{publicacion.usuario?.name}</Typography>
+          <Typography variant="body1">{publicacion.body}</Typography>
 
-      {publicacion.comentarios && (
-        <ListaComentarios comentarios={publicacion.comentarios} />
-      )}
-    </li>
+          {publicacion.comentarios && (
+            <ListaComentarios comentarios={publicacion.comentarios} />
+          )}
+        </CardContent>
+      </Card>
+    </ListItem>
   );
 };

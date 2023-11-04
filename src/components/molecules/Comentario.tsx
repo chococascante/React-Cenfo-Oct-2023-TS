@@ -1,4 +1,5 @@
 import React from "react";
+import { ListItem, Card, CardContent, Typography } from "@mui/material";
 import type { Comment } from "../../types";
 
 interface ComentarioProps {
@@ -7,9 +8,13 @@ interface ComentarioProps {
 
 export const Comentario: React.FC<ComentarioProps> = ({ comentario }) => {
   return (
-    <li>
-      <p>{comentario.name}</p>
-      <p>{comentario.body}</p>
-    </li>
+    <ListItem>
+      <Card>
+        <CardContent>
+          <Typography variant="caption">{comentario.name}</Typography>
+          <Typography variant="body2">{comentario.body}</Typography>
+        </CardContent>
+      </Card>
+    </ListItem>
   );
 };
