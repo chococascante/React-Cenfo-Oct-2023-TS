@@ -12,7 +12,7 @@ export const ListaComentarios: React.FC<ListaComentariosProps> = ({
 }) => {
   return (
     <List>
-      {comentarios?.map((comentario) => (
+      {comentarios.map((comentario) => (
         <Comentario key={comentario.id} comentario={comentario} />
       ))}
     </List>

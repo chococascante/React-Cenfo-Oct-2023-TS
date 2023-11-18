@@ -1,5 +1,5 @@
 import React from "react";
-import { Publicacion } from "../molecules/Publicacion";
+import { Publicacion } from "../molecules/Publicacion/Publicacion";
 import { List } from "@mui/material";
 import type { Post } from "../../types/Post";
 
