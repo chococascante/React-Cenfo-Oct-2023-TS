@@ -1,12 +1,10 @@
 import React from "react";
-import { HomePage } from "./components/pages/HomePage";
 import "./App.css";
 import { Provider } from "react-redux";
 import { store } from "./store/configureStore";
-import { Counter } from "./components/organisms/Counter";
-import { Users } from "./components/pages/Users";
 import { CounterContextProvider } from "./contexts/CounterContext";
 import { UsersContextProvider } from "./contexts/UsersContext";
+import { MainRouter } from "./routes";
 
 function App() {
   return (
@@ -14,9 +12,7 @@ function App() {
       <UsersContextProvider>
         <CounterContextProvider>
           <main className="App">
-            {/* <HomePage /> */}
-            <Counter />
-            <Users />
+            <MainRouter />
           </main>
         </CounterContextProvider>
       </UsersContextProvider>
